@@ -41,6 +41,10 @@ public class Partita {
 		this.giocatore = giocatore;
 	}
 	
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu()>0;
+	}
+	
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
 	 * @return vero se partita vinta
