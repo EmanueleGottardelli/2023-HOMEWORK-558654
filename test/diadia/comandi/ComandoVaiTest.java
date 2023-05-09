@@ -16,13 +16,20 @@ public class ComandoVaiTest {
 	private Stanza s2;
 	private ComandoVai vai;
 	private Partita p;
+	Labirinto labirinto;
 	
 	@Before 
 	public void setUp() {
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("chiave", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
 		s1 = new Stanza("aula1");
 		s2 = new Stanza("aula2");
 		vai = new ComandoVai();
-		p = new Partita();
+		p = new Partita(labirinto);
 		vai.setIO(new IOconsole());
 	}
 

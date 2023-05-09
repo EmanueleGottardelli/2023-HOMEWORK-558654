@@ -19,10 +19,17 @@ public class ComandoPrendiTest {
 	private Attrezzo a2;
 	private ComandoPrendi prendi;
 	private Partita p;
+	Labirinto labirinto;
 	
 	@Before 
 	public void setUp() throws Exception {
-		p = new Partita();
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("forbice", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "sud")
+				.getLabirinto();
+		p = new Partita(labirinto);
 		s = new Stanza("aula1");
 		a1 = new Attrezzo("osso", 1);
 		a2 = new Attrezzo("pneumatico", 15);
@@ -34,13 +41,10 @@ public class ComandoPrendiTest {
 	public void tearDown() throws Exception {
 	}
 	
-	public boolean attrezzoPresente(String s) {
-		Attrezzo[] array = p.getLabirinto().getStanzaCorrente().getAttrezzi();
-		for(Attrezzo a : array) {
-			if(a != null && s.equals(a.getNome()))
-					return true;
-		}
-		return false;
+	public boolean attrezzoPresente(String s) {		
+		if(p.getStanzaCorrente().getAttrezzo(s) == null)
+					return false;
+		return true;
 	}
 
 	

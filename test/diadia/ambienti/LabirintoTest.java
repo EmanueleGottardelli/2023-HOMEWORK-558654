@@ -10,14 +10,20 @@ import it.uniroma3.diadia.ambienti.*;
 public class LabirintoTest {
 	Labirinto l;
 	Stanza sc;
-	Stanza s2;
 	
 	@Before
 	public void setUp() {
-		l = new Labirinto();
-		l.creaStanze();
+		l = Labirinto.newBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
+		
 		sc = new Stanza("sc");
+		
 	}
+
 
 	@Test
 	public void testGetStanzaVincente() {

@@ -4,14 +4,28 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.ambienti.*;
 
 import org.junit.Test;
+import org.junit.Before;
 
 public class PartitaTest {
-	Partita p = new Partita();
-	Stanza s = new Stanza("Stanza");
+	private Labirinto labirinto;
+	private Partita p;
+	private Stanza s;
 	
+	
+	@Before
+	public void setUp() {
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("gessetto",1)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
+		p = new Partita(labirinto);
+		s = new Stanza("stanza");
+	}
 	@Test
 	public void testGetStanzaVincente() {
 		assertEquals("Biblioteca", p.getLabirinto().getStanzaVincente().getNome());
